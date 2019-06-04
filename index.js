@@ -13,10 +13,10 @@ function Tabler (data, options) {
 					}
 					tabler.heading += "</tr> </thead>"
 				}
-				const content = "<tbody>"
-				const num = options.num ? options.num : data.length 
+				var content = "<tbody>"
+				var num = options.num ? options.num : data.length 
 				for (let i = 0; i < num; i ++) {
-						const field = data[i] 
+						let field = data[i] 
 					content += `<tr>`
 					for(let infokey in field) {
 						content += `<td> ${field[infokey]} </td>`
@@ -25,10 +25,10 @@ function Tabler (data, options) {
 				}
 				content += "</tbody>"
 				tabler.data = data
-				const together = `<table class='tabler'> ${tabler.heading} ${content} </table>`
+				var together = `<table class='tabler'> ${tabler.heading} ${content} </table>`
 				// if element supplied, then attach to the element else attach to the body 
 				if(options.elem){
-					elem.innerHTML = together
+					options.elem.innerHTML = together
 				} else {
 					document.body.innerHTML += together
 				}
