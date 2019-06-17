@@ -1,84 +1,87 @@
 function Tabultr (data, options) {
-			tb = {}
-  		tb.options = {
-        	theme:"white",
-      		rows:data.length,
-      		unstyled:false,
-      		elem:null
-      		}
-  		if(options){
-        for(key in options)
-      }
-		if('a' == 'a') {
-			//check if the headings were passed
-
-				// if element supplied, then attach to the element else attach to the body 
-				if(options.elem){
-					options.elem.innerHTML = together
-				} else {
-					document.body.innerHTML += together
-				}
-				// get reference to the element for further customization
-				tabler.reference = document.querySelector(".tabler")
-				return tabler
-				if(options.colorScheme)
-					tabler.reference.class= option.colorScheme
-		} else {
-			console.log("data not an array !!")
-			tabler.table = null
-		}
+  	if(isDataAnArray(data)){
+		var tb = initializer(options)
+    var tb_headings = makeColumnsTitle(tb.titles)
+    var tb_body = makeTableBody(data,tb.rows)
+    var fulltable = `<table> ${tb_headings} ${tb_body} </table>`
+    
+    }
 	}
 
 
 
-function isDataArray(data){
+function isDataAnArray(data){
   return typeof data === Array
 }
 
-function makeTable(data,rows,title){
-  			if(title) {
-				
-				} else {
-				//if headings were not passed, get the heading from the attr name of the 
-				//first element in the data
-					tabler.heading =	` <thead> <tr> `
-					for(attr in data[0]) {
-							tabler.heading += `<th> ${attr} </th>`
-					}
-					tabler.heading += "</tr> </thead>"
-				}
-				var content = "<tbody>"
-				var num = options.num ? options.num : data.length 
-				for (let i = 0; i < num; i ++) {
-						let field = data[i] 
-					content += `<tr>`
-					for(let infokey in field) {
-						content += `<td> ${field[infokey]} </td>`
-					}
-					content += "</tr>"
-				}
-				content += "</tbody>"
-				tabler.data = data
-				var together = `<table class='tabler'> ${tabler.heading} ${content} </table>`
+  
+function extractNumOfRowsFromTable(data,rows){
+	const total = data.length
+  const howmuch = Math.floor((total/rows) * 10)
+  return howmuch
+}  
+
+//   Initialize the table
+function initializer(data,options){
+  const tb = {}
+  tb.options = {
+    theme : "white",
+    unstyled : false,
+    elem : null,
+    rows : 10,
+    titles : extractTitleFromFirstRow(data)
+  }
+ if(options){
+   for(let key in options){
+     if(tb.options[key]){
+       tb.options[key] == options[key]
+     }
+   }
+ }
+  return tb
 }
+
   
-function initializer(tb){
-  
-}
-  
-function makeTableTitle(titles){
+// Make the table title from the list of titles supplied
+function makeColumnsTitle(titles){
   for(var title in titles){
     title+=`<td>${title}</td>`
   }
   title+="</tr> </head>"
 }
   
+// Extract the titles from the property name of the first column
 function extractTitleFromFirstRow(data){
   const firstelement = data[0]
-  var title = "<thead> <tr>"
+  var titles = []
   for(var key in firstelement){
-    title+=`<td>${key}</td>`
+    titles.push(key)
   }
-  title+="</tr> </head>"
 }
-function makeTableBody
+  
+// Make the table body
+function makeTableBody(data,rows){
+  			var contents = "<tbody>"
+				for (let i = 0; i < extractNumOfRowsFromTable(data,rows); i ++) {
+						let field = data[i] 
+					contents += `<tr>`
+					for(let infokey in field) {
+						contents += `<td> ${field[infokey]} </td>`
+					}
+					contents += "</tr>"
+				}
+				contents += "</tbody>"
+					return contents
+  
+}
+
+function renderTableToDOM(table_string,elem){
+  if(elem){
+    elem.innerHTML= {table_string}
+  }
+  else {
+    const tableContainer = document.createElement("div")
+    tableContainer.innerHTML=table_string
+    document.body.appendChild(tableContainer)
+  }
+}
