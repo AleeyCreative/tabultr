@@ -26,6 +26,7 @@ Tabler.js is a small javascript library that enables you quickly render your dat
 ### Features
 
 - Column title inference if no title is supplied
+- Render data in a beautiful HTML5 table
 
 
 ### API 
