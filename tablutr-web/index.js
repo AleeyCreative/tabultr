@@ -1,13 +1,21 @@
 function Tabultr (data, options) {
-  	if(isDataAnArray(data)){
-		var tb = initializer(options)
-    var tb_headings = makeColumnsTitle(tb.titles)
-    var tb_body = makeTableBody(data,tb.rows)
-    var fulltable = `<table> ${tb_headings} ${tb_body} </table>`
-    
-    }
+     let tb = CreateTabltr(data,options)
+     renderTableToDOM(tb.table)
+     return tb
 	}
 
+
+function CreateTabltr(data,options)
+{
+  	let tb = initializer(data,options)
+    let tb_headings = makeColumnsTitle(tb.options.titles)
+    console.log(tb_headings)
+    let tb_body = makeTableBody(data,tb.rows)
+    let fulltable = `<table> ${tb_headings} ${tb_body} </table>`
+    tb.data = data
+    tb.table = fulltable
+  	return tb
+}
 
 
 function isDataAnArray(data){
@@ -44,24 +52,27 @@ function initializer(data,options){
   
 // Make the table title from the list of titles supplied
 function makeColumnsTitle(titles){
-  for(var title in titles){
-    title+=`<td>${title}</td>`
+  let alltitle = "<thead>"
+  for(let title of titles){
+    alltitle+=`<th>${title.toUpperCase()}</th>`
   }
-  title+="</tr> </head>"
+  alltitle+="</tr> </thead>"
+  return alltitle
 }
   
 // Extract the titles from the property name of the first column
 function extractTitleFromFirstRow(data){
   const firstelement = data[0]
-  var titles = []
-  for(var key in firstelement){
+  let titles = []
+  for(let key in firstelement){
     titles.push(key)
   }
+  return titles
 }
   
 // Make the table body
 function makeTableBody(data,rows){
-  			var contents = "<tbody>"
+  			let contents = "<tbody>"
 				for (let i = 0; i < extractNumOfRowsFromTable(data,rows); i ++) {
 						let field = data[i] 
 					contents += `<tr>`
@@ -72,10 +83,12 @@ function makeTableBody(data,rows){
 				}
 				contents += "</tbody>"
 					return contents
+  			console.log(contents)
   
 }
 
-function renderTableToDOM(table_string,elem){
+function renderTableToDOM(table_string,elem)
+{
   if(elem){
     elem.innerHTML= {table_string}
   }
@@ -84,4 +97,11 @@ function renderTableToDOM(table_string,elem){
     tableContainer.innerHTML=table_string
     document.body.appendChild(tableContainer)
   }
+}
+
+function configure(tb,attr,val)
+{
+  tb.options[attr] = val
+  tb = CreateTabltr(tb.data,tb.options)
+  renderTableToDOM(tb.table )
 }
