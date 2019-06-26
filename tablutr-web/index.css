@@ -1,26 +1,26 @@
-.tabler {
+.tablutr {
     border-collapse:collapse;
     box-shadow:grey 1px 1px 40px 1px;
     margin:auto;
 }
 
-.tabler tbody tr:nth-child(even) {
+.tablutr tbody tr:nth-child(even) {
  color:black;
  background:cyan;
  
 }
-.tabler tbody tr td {
+.tablutr tbody tr td {
     padding:4vh;
 }
 
-.tabler thead {
+.tablutr thead {
  background:blue;
  color:white;
 }
 
-.tabler thead th {
+.tablutr thead th {
     padding:10px;
     text-transform:uppercase;
 }
 
-.tabler 
+ 

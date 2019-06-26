@@ -1,17 +1,20 @@
 function Tabultr (data, options) {
-     let tb = CreateTabltr(data,options)
-     renderTableToDOM(tb.table)
-     return tb
+  	 if(isDataAnArray(data))
+     {
+      let tb = CreateTabltr(data,options)
+      renderTableToDOM(tb.table)
+      return tb
+     }
 	}
 
 
 function CreateTabltr(data,options)
 {
   	let tb = initializer(data,options)
-    let tb_headings = makeColumnsTitle(tb.options.titles)
+    let tb_headings = makeColumnsTitle(tb.options)
     console.log(tb_headings)
-    let tb_body = makeTableBody(data,tb.rows)
-    let fulltable = `<table> ${tb_headings} ${tb_body} </table>`
+    let tb_body = makeTableBody(data,tb.options)
+    let fulltable = `<table class="tablutr"> ${tb_headings} ${tb_body} </table>`
     tb.data = data
     tb.table = fulltable
   	return tb
@@ -19,7 +22,7 @@ function CreateTabltr(data,options)
 
 
 function isDataAnArray(data){
-  return typeof data === Array
+  return data.length !== undefined
 }
 
   
@@ -51,7 +54,7 @@ function initializer(data,options){
 
   
 // Make the table title from the list of titles supplied
-function makeColumnsTitle(titles){
+function makeColumnsTitle({titles}){
   let alltitle = "<thead>"
   for(let title of titles){
     alltitle+=`<th>${title.toUpperCase()}</th>`
@@ -71,7 +74,7 @@ function extractTitleFromFirstRow(data){
 }
   
 // Make the table body
-function makeTableBody(data,rows){
+function makeTableBody(data,{rows}){
   			let contents = "<tbody>"
 				for (let i = 0; i < extractNumOfRowsFromTable(data,rows); i ++) {
 						let field = data[i] 
@@ -82,9 +85,7 @@ function makeTableBody(data,rows){
 					contents += "</tr>"
 				}
 				contents += "</tbody>"
-					return contents
-  			console.log(contents)
-  
+					return contents  
 }
 
 function renderTableToDOM(table_string,elem)
