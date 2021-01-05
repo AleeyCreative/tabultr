@@ -1,0 +1,20 @@
+{
+  "name": "tabultr",
+  "version": "1.0.0",
+  "description": "A simple and small javascript library that quickly renders json data onto a HTML5 table. It is useful when trying to quickly peak at your data before deciding how you intend to render them.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AleeyCreative/tabultr.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AleeyCreative/tabultr/issues"
+  },
+  "homepage": "https://github.com/AleeyCreative/tabultr#readme"
+}

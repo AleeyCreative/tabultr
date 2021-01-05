@@ -45,7 +45,7 @@ function initializer(data,options){
  if(options){
    for(let key in options){
      if(tb.options[key]){
-       tb.options[key] == options[key]
+       tb.options[key] = options[key]
      }
    }
  }
