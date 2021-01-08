@@ -1,0 +1,30 @@
+:root {
+    --color-blue-100: #161650;
+    --color-blue-200: #000055;
+    --color-blue-300: #0b0b28;
+}
+
+body {
+    margin: 0px;
+    padding: 0px;
+    background: var(--color-blue-100);
+}
+table {
+    background: var(--color-blue-300);
+    color: white;
+    margin: auto;
+    box-shadow: var(--color-blue-300) 1px 1px 30px 1px;
+    margin-top: 150px;
+    min-width: 800px;
+    max-width: 60%;
+}
+thead tr {
+    background-color: var(--color-blue-200);
+}
+
+th,
+td {
+    padding: 1rem 1.5rem;
+    text-align: center;
+    border-collapse: collapse;
+}
